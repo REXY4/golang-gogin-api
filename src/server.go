@@ -1,11 +1,18 @@
 package src
 
 import (
+	"encoding/json"
+
 	"github.com/gin-gonic/gin"
 )
 
-func Server(_author string, _name string, _port string) {
-	r := gin.New()
-	port := ":" + _port
+func Server(manifest string) {
+	r := gin.Default()
+	var config map[string]map[string]string
+	err := json.Unmarshal([]byte(manifest), &config)
+	if err != nil {
+		panic(err.Error())
+	}
+	port := ":" + config["app"]["port"]
 	r.Run(port)
 }
