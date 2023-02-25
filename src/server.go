@@ -1,13 +1,11 @@
 package src
 
 import (
-	"github.com/REXY4/golang-gogin-api/config"
 	"github.com/gin-gonic/gin"
 )
 
-func Start() {
-	cfg := config.ConfigApp()
-	r := gin.Default()
-	port := ":" + cfg.Port
+func Server(_author string, _name string, _port string) {
+	r := gin.New()
+	port := ":" + _port
 	r.Run(port)
 }
