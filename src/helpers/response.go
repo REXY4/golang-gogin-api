@@ -7,12 +7,12 @@ type Response struct {
 	Data       interface{} `json:"data"`
 }
 
-func BuildResponse(message string) Response {
+func BuildResponse(message string, data interface{}) Response {
 	res := Response{
 		StatusCode: 200,
 		Status:     "sucess",
 		Message:    message,
-		// Data:       data,
+		Data:       data,
 	}
 	return res
 }
