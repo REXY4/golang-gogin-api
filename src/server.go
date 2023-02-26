@@ -16,17 +16,10 @@ func Server(manifest string) {
 	}
 	routes := routers.Router()
 	for _, route := range routes() {
-		r.Handle(route.Method, route.Path, route.Action)
+		for _, routes := range route.Action {
+			r.Handle(route.Method, route.Path, routes)
+		}
 	}
 	port := ":" + config["app"]["port"]
 	r.Run(port)
 }
-
-// // Get the Gin router from the routers package
-// router := routers.Router()
-
-// // Register the routes defined in the router with the Gin engine
-// routes := r.Routes()
-// for _, route := range router.Routes() {
-// 	r.Handle(route.Method, route.Path, route.HandlerFuncs...)
-// }
