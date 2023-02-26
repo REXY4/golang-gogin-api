@@ -2,6 +2,7 @@ package src
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/REXY4/golang-gogin-api/src/routers"
 	"github.com/gin-gonic/gin"
@@ -14,7 +15,10 @@ func Server(manifest string) {
 	if err != nil {
 		panic(err.Error())
 	}
-	routers.Router()
+	// routes := r.Router()
+	for _, route := range routers.Router() {
+		log.Println("ini route", route)
+	}
 	port := ":" + config["app"]["port"]
 	r.Run(port)
 }

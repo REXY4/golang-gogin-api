@@ -8,6 +8,15 @@ type Config struct {
 	R *gin.Engine
 }
 
-func Router() {
-	PingDefenition()
+type route struct {
+	Ping func() []defenition
+}
+
+func Router() []route {
+	routes := []route{
+		{
+			Ping: PingDefenition,
+		},
+	}
+	return routes
 }
