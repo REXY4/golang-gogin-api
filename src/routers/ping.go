@@ -5,18 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type defenition struct {
-	Method string
-	Path   string
-	Action []func(c *gin.Context)
-}
-
 var (
 	getPing = controllers.GetPing
 )
 
-func PingDefenition() []defenition {
-	def := []defenition{
+func PingDefenition() []Definition {
+	def := []Definition{
 		{
 			Method: "GET",
 			Path:   "/ping",

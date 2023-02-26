@@ -8,15 +8,21 @@ type Config struct {
 	R *gin.Engine
 }
 
-type route struct {
-	Ping func() []defenition
+type Definition struct {
+	Method string                 `json:"method"`
+	Path   string                 `json:"path"`
+	Action []func(c *gin.Context) `json:"action"`
 }
 
-func Router() []route {
-	routes := []route{
-		{
-			Ping: PingDefenition,
-		},
+func Router() func() []Definition {
+	routes := []func() []Definition{
+		PingDefenition,
 	}
-	return routes
+	return func() []Definition {
+		result := []Definition{}
+		for _, r := range routes {
+			result = append(result, r()...)
+		}
+		return result
+	}
 }
