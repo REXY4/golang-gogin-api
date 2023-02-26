@@ -9,9 +9,9 @@ type Config struct {
 }
 
 type Definition struct {
-	Method string                 `json:"method"`
-	Path   string                 `json:"path"`
-	Action []func(c *gin.Context) `json:"action"`
+	Method string               `json:"method"`
+	Path   string               `json:"path"`
+	Action func(c *gin.Context) `json:"action"`
 }
 
 func Router() func() []Definition {

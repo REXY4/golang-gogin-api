@@ -2,20 +2,10 @@ package src
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/REXY4/golang-gogin-api/src/routers"
 	"github.com/gin-gonic/gin"
 )
-
-func setRouter() {
-	routers := routers.Router()
-	// for index := range routers {
-	// 	fmt
-	// }
-
-	fmt.Println(routers())
-}
 
 func Server(manifest string) {
 	r := gin.Default()
@@ -24,7 +14,10 @@ func Server(manifest string) {
 	if err != nil {
 		panic(err.Error())
 	}
-	setRouter()
+	routes := routers.Router()
+	for _, route := range routes() {
+		r.Handle(route.Method, route.Path, route.Action)
+	}
 	port := ":" + config["app"]["port"]
 	r.Run(port)
 }

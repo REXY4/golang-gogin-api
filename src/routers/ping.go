@@ -2,7 +2,6 @@ package routers
 
 import (
 	"github.com/REXY4/golang-gogin-api/src/controllers"
-	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -14,9 +13,7 @@ func PingDefenition() []Definition {
 		{
 			Method: "GET",
 			Path:   "/ping",
-			Action: []func(c *gin.Context){
-				getPing,
-			},
+			Action: getPing,
 		},
 	}
 	return def
