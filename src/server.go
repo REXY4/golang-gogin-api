@@ -9,6 +9,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/REXY4/golang-gogin-api/src/models"
 	"github.com/REXY4/golang-gogin-api/src/routers"
 	"github.com/REXY4/golang-gogin-api/src/setups"
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,9 @@ import (
 func SetupServer(manifest string) {
 	//setup db
 	db := setups.SetupConnectionSql(manifest)
+	db.Debug().AutoMigrate(
+		&models.Todo{},
+	)
 	defer setups.CloseSqlConnection(db)
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
