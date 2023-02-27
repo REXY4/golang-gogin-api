@@ -22,7 +22,9 @@ func SetupServer(manifest string) {
 	defer stop()
 
 	r := gin.Default()
+
 	var config map[string]map[string]string
+
 	err := json.Unmarshal([]byte(manifest), &config)
 	if err != nil {
 		panic(err.Error())
@@ -34,7 +36,6 @@ func SetupServer(manifest string) {
 		}
 	}
 	port := ":" + config["app"]["port"]
-	// r.Run(port)
 
 	srv := &http.Server{
 		Addr:    port,
