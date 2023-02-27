@@ -7,7 +7,7 @@ import (
 )
 
 func setup(config string) {
-	Server(config)
+	SetupServer(config)
 }
 
 func Start() {

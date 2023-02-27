@@ -9,6 +9,7 @@ import (
 
 type Configuration struct {
 	App *AppConfig `json:"app"`
+	Sql *SqlConfig `json:"sql"`
 }
 
 func init() {
@@ -21,11 +22,11 @@ func init() {
 func Configs() (string, error) {
 	data := &Configuration{
 		App: MainAppConfig(),
+		Sql: ConfigSql(),
 	}
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		log.Panic(err)
 	}
-	// fmt.Println(string(jsonData))
 	return string(jsonData), nil
 }
